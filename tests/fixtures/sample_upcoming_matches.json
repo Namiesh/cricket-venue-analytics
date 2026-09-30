@@ -1,0 +1,90 @@
+{
+  "apikey": "test_api_key",
+  "status": "success",
+  "data": [
+    {
+      "id": "match_odi_1",
+      "name": "India vs West Indies, 1st ODI",
+      "matchType": "odi",
+      "status": "Match not started",
+      "venue": "Barsapara Cricket Stadium, Guwahati",
+      "date": "2026-09-30",
+      "dateTimeGMT": "2026-09-30T08:30:00",
+      "teams": ["India", "West Indies"],
+      "matchStarted": false,
+      "matchEnded": false
+    },
+    {
+      "id": "match_t20_1",
+      "name": "South Africa vs Australia, 1st T20I",
+      "matchType": "t20",
+      "status": "Match not started",
+      "venue": "Wankhede Stadium, Mumbai",
+      "date": "2026-10-01",
+      "dateTimeGMT": "2026-10-01T14:00:00",
+      "teams": ["South Africa", "Australia"],
+      "matchStarted": false,
+      "matchEnded": false
+    },
+    {
+      "id": "match_test_1",
+      "name": "England vs Australia, 1st Test",
+      "matchType": "test",
+      "status": "Match not started",
+      "venue": "Lord's, London",
+      "date": "2026-10-05",
+      "dateTimeGMT": "2026-10-05T10:00:00",
+      "teams": ["England", "Australia"],
+      "matchStarted": false,
+      "matchEnded": false
+    },
+    {
+      "id": "match_ipl_1",
+      "name": "Mumbai Indians vs Chennai Super Kings",
+      "matchType": "t20",
+      "status": "Match not started",
+      "venue": "Wankhede Stadium, Mumbai",
+      "date": "2026-10-10",
+      "dateTimeGMT": "2026-10-10T14:00:00",
+      "teams": ["Mumbai Indians", "Chennai Super Kings"],
+      "matchStarted": false,
+      "matchEnded": false
+    },
+    {
+      "id": "match_women_1",
+      "name": "India Women vs Australia Women, 1st WODI",
+      "matchType": "odi",
+      "status": "Match not started",
+      "venue": "M Chinnaswamy Stadium, Bengaluru",
+      "date": "2026-10-12",
+      "dateTimeGMT": "2026-10-12T09:00:00",
+      "teams": ["India Women", "Australia Women"],
+      "matchStarted": false,
+      "matchEnded": false
+    },
+    {
+      "id": "match_ended_1",
+      "name": "India vs Pakistan, 2nd ODI",
+      "matchType": "odi",
+      "status": "India won by 5 wickets",
+      "venue": "Melbourne Cricket Ground",
+      "date": "2026-09-20",
+      "dateTimeGMT": "2026-09-20T08:00:00",
+      "teams": ["India", "Pakistan"],
+      "matchStarted": true,
+      "matchEnded": true
+    },
+    {
+      "id": "match_unknown_venue",
+      "name": "New Zealand vs Pakistan, 3rd ODI",
+      "matchType": "odi",
+      "status": "Match not started",
+      "venue": "Imaginary Ground 99, Unknown City",
+      "date": "2026-10-15",
+      "dateTimeGMT": "2026-10-15T03:00:00",
+      "teams": ["New Zealand", "Pakistan"],
+      "matchStarted": false,
+      "matchEnded": false
+    }
+  ]
+}

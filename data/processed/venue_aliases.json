@@ -1,0 +1,578 @@
+{
+  "jb_marks_oval": {
+    "canonical_name": "JB Marks Oval, Potchefstroom",
+    "city": "Potchefstroom",
+    "country": "South Africa",
+    "aliases": [
+      "JB Marks Oval",
+      "JB Marks Oval, Potchefstroom",
+      "Senwes Park",
+      "Senwes Park, Potchefstroom",
+      "Sedgars Park",
+      "Sedgars Park, Potchefstroom",
+      "North West Cricket Stadium"
+    ]
+  },
+  "wankhede_stadium_mumbai": {
+    "canonical_name": "Wankhede Stadium, Mumbai",
+    "city": "Mumbai",
+    "country": "India",
+    "aliases": [
+      "Wankhede Stadium",
+      "Wankhede Stadium, Mumbai"
+    ]
+  },
+  "brabourne_stadium_mumbai": {
+    "canonical_name": "Brabourne Stadium, Mumbai",
+    "city": "Mumbai",
+    "country": "India",
+    "aliases": [
+      "Brabourne Stadium",
+      "Brabourne Stadium, Mumbai"
+    ]
+  },
+  "m_chinnaswamy_stadium_bengaluru": {
+    "canonical_name": "M. Chinnaswamy Stadium, Bengaluru",
+    "city": "Bengaluru",
+    "country": "India",
+    "aliases": [
+      "M. Chinnaswamy Stadium",
+      "M. Chinnaswamy Stadium, Bengaluru",
+      "M Chinnaswamy Stadium",
+      "M.Chinnaswamy Stadium",
+      "Chinnaswamy Stadium",
+      "KSCA Stadium"
+    ]
+  },
+  "eden_gardens_kolkata": {
+    "canonical_name": "Eden Gardens, Kolkata",
+    "city": "Kolkata",
+    "country": "India",
+    "aliases": [
+      "Eden Gardens",
+      "Eden Gardens, Kolkata"
+    ]
+  },
+  "arun_jaitley_stadium_delhi": {
+    "canonical_name": "Arun Jaitley Stadium, Delhi",
+    "city": "Delhi",
+    "country": "India",
+    "aliases": [
+      "Arun Jaitley Stadium",
+      "Arun Jaitley Stadium, Delhi",
+      "Feroz Shah Kotla",
+      "Feroz Shah Kotla, Delhi",
+      "Feroz Shah Kotla Ground"
+    ]
+  },
+  "ma_chidambaram_stadium_chennai": {
+    "canonical_name": "MA Chidambaram Stadium, Chennai",
+    "city": "Chennai",
+    "country": "India",
+    "aliases": [
+      "MA Chidambaram Stadium",
+      "MA Chidambaram Stadium, Chepauk",
+      "MA Chidambaram Stadium, Chepauk, Chennai",
+      "Chepauk",
+      "M.A. Chidambaram Stadium"
+    ]
+  },
+  "narendra_modi_stadium_ahmedabad": {
+    "canonical_name": "Narendra Modi Stadium, Ahmedabad",
+    "city": "Ahmedabad",
+    "country": "India",
+    "aliases": [
+      "Narendra Modi Stadium",
+      "Narendra Modi Stadium, Ahmedabad",
+      "Sardar Patel Stadium",
+      "Sardar Patel Stadium, Motera",
+      "Motera Stadium",
+      "Motera"
+    ]
+  },
+  "barsapara_cricket_stadium_guwahati": {
+    "canonical_name": "Barsapara Cricket Stadium, Guwahati",
+    "city": "Guwahati",
+    "country": "India",
+    "aliases": [
+      "Barsapara Cricket Stadium",
+      "Barsapara Cricket Stadium, Guwahati",
+      "Barsapara Stadium",
+      "Dr. Bhupen Hazarika Cricket Stadium"
+    ]
+  },
+  "rajiv_gandhi_stadium_hyderabad": {
+    "canonical_name": "Rajiv Gandhi International Stadium, Hyderabad",
+    "city": "Hyderabad",
+    "country": "India",
+    "aliases": [
+      "Rajiv Gandhi International Stadium",
+      "Rajiv Gandhi International Stadium, Uppal",
+      "Rajiv Gandhi International Stadium, Uppal, Hyderabad",
+      "Visaka International Cricket Stadium"
+    ]
+  },
+  "hpca_stadium_dharamsala": {
+    "canonical_name": "HPCA Stadium, Dharamshala",
+    "city": "Dharamshala",
+    "country": "India",
+    "aliases": [
+      "Himachal Pradesh Cricket Association Stadium",
+      "Himachal Pradesh Cricket Association Stadium, Dharamsala",
+      "HPCA Stadium",
+      "HPCA Stadium, Dharamsala"
+    ]
+  },
+  "ekana_stadium_lucknow": {
+    "canonical_name": "Ekana Cricket Stadium, Lucknow",
+    "city": "Lucknow",
+    "country": "India",
+    "aliases": [
+      "Bharat Ratna Shri Atal Bihari Vajpayee Ekana Cricket Stadium",
+      "Bharat Ratna Shri Atal Bihari Vajpayee Ekana Cricket Stadium, Lucknow",
+      "Ekana Cricket Stadium",
+      "Ekana International Cricket Stadium"
+    ]
+  },
+  "lords_london": {
+    "canonical_name": "Lord's, London",
+    "city": "London",
+    "country": "England",
+    "aliases": [
+      "Lord's",
+      "Lord's, London",
+      "Lords"
+    ]
+  },
+  "the_oval_london": {
+    "canonical_name": "The Oval, London",
+    "city": "London",
+    "country": "England",
+    "aliases": [
+      "The Oval",
+      "The Oval, London",
+      "Kennington Oval",
+      "Kennington Oval, London",
+      "Kia Oval"
+    ]
+  },
+  "edgbaston_birmingham": {
+    "canonical_name": "Edgbaston, Birmingham",
+    "city": "Birmingham",
+    "country": "England",
+    "aliases": [
+      "Edgbaston",
+      "Edgbaston, Birmingham"
+    ]
+  },
+  "trent_bridge_nottingham": {
+    "canonical_name": "Trent Bridge, Nottingham",
+    "city": "Nottingham",
+    "country": "England",
+    "aliases": [
+      "Trent Bridge",
+      "Trent Bridge, Nottingham"
+    ]
+  },
+  "headingley_leeds": {
+    "canonical_name": "Headingley, Leeds",
+    "city": "Leeds",
+    "country": "England",
+    "aliases": [
+      "Headingley",
+      "Headingley, Leeds",
+      "Headingley Carnegie"
+    ]
+  },
+  "old_trafford_manchester": {
+    "canonical_name": "Old Trafford, Manchester",
+    "city": "Manchester",
+    "country": "England",
+    "aliases": [
+      "Old Trafford",
+      "Old Trafford, Manchester",
+      "Emirates Old Trafford"
+    ]
+  },
+  "mcg_melbourne": {
+    "canonical_name": "Melbourne Cricket Ground, Melbourne",
+    "city": "Melbourne",
+    "country": "Australia",
+    "aliases": [
+      "Melbourne Cricket Ground",
+      "Melbourne Cricket Ground, Melbourne",
+      "MCG"
+    ]
+  },
+  "scg_sydney": {
+    "canonical_name": "Sydney Cricket Ground, Sydney",
+    "city": "Sydney",
+    "country": "Australia",
+    "aliases": [
+      "Sydney Cricket Ground",
+      "Sydney Cricket Ground, Sydney",
+      "SCG"
+    ]
+  },
+  "gabba_brisbane": {
+    "canonical_name": "Brisbane Cricket Ground, Brisbane",
+    "city": "Brisbane",
+    "country": "Australia",
+    "aliases": [
+      "Brisbane Cricket Ground, Woolloongabba",
+      "Brisbane Cricket Ground",
+      "Brisbane Cricket Ground, Woolloongabba, Brisbane",
+      "Gabba",
+      "The Gabba"
+    ]
+  },
+  "adelaide_oval_adelaide": {
+    "canonical_name": "Adelaide Oval, Adelaide",
+    "city": "Adelaide",
+    "country": "Australia",
+    "aliases": [
+      "Adelaide Oval",
+      "Adelaide Oval, Adelaide"
+    ]
+  },
+  "perth_stadium_perth": {
+    "canonical_name": "Perth Stadium, Perth",
+    "city": "Perth",
+    "country": "Australia",
+    "aliases": [
+      "Perth Stadium",
+      "Optus Stadium",
+      "Perth Stadium, Perth"
+    ]
+  },
+  "waca_perth": {
+    "canonical_name": "WACA Ground, Perth",
+    "city": "Perth",
+    "country": "Australia",
+    "aliases": [
+      "WACA Ground",
+      "WACA Ground, Perth",
+      "W.A.C.A. Ground"
+    ]
+  },
+  "bellerive_oval_hobart": {
+    "canonical_name": "Bellerive Oval, Hobart",
+    "city": "Hobart",
+    "country": "Australia",
+    "aliases": [
+      "Bellerive Oval",
+      "Bellerive Oval, Hobart",
+      "Blundstone Arena"
+    ]
+  },
+  "supersport_park_centurion": {
+    "canonical_name": "SuperSport Park, Centurion",
+    "city": "Centurion",
+    "country": "South Africa",
+    "aliases": [
+      "SuperSport Park",
+      "SuperSport Park, Centurion",
+      "Centurion Park"
+    ]
+  },
+  "wanderers_johannesburg": {
+    "canonical_name": "Wanderers Stadium, Johannesburg",
+    "city": "Johannesburg",
+    "country": "South Africa",
+    "aliases": [
+      "Wanderers Stadium",
+      "Wanderers Stadium, Johannesburg",
+      "New Wanderers Stadium",
+      "Bidvest Wanderers Stadium"
+    ]
+  },
+  "newlands_cape_town": {
+    "canonical_name": "Newlands, Cape Town",
+    "city": "Cape Town",
+    "country": "South Africa",
+    "aliases": [
+      "Newlands",
+      "Newlands, Cape Town",
+      "PPG Newlands"
+    ]
+  },
+  "kingsmead_durban": {
+    "canonical_name": "Kingsmead, Durban",
+    "city": "Durban",
+    "country": "South Africa",
+    "aliases": [
+      "Kingsmead",
+      "Kingsmead, Durban",
+      "Sahara Stadium Kingsmead"
+    ]
+  },
+  "boland_park_paarl": {
+    "canonical_name": "Boland Park, Paarl",
+    "city": "Paarl",
+    "country": "South Africa",
+    "aliases": [
+      "Boland Park",
+      "Boland Park, Paarl",
+      "Boland Bank Park, Paarl"
+    ]
+  },
+  "st_georges_park_gqeberha": {
+    "canonical_name": "St George's Park, Gqeberha",
+    "city": "Gqeberha",
+    "country": "South Africa",
+    "aliases": [
+      "St George's Park",
+      "St George's Park, Port Elizabeth",
+      "St George's Park, Gqeberha",
+      "Sahara Oval St George's"
+    ]
+  },
+  "darren_sammy_stadium_st_lucia": {
+    "canonical_name": "Darren Sammy National Cricket Stadium, Gros Islet",
+    "city": "Gros Islet",
+    "country": "West Indies",
+    "aliases": [
+      "Darren Sammy National Cricket Stadium",
+      "Darren Sammy National Cricket Stadium, Gros Islet",
+      "Beausejour Stadium",
+      "Beausejour Stadium, Gros Islet"
+    ]
+  },
+  "sir_vivian_richards_stadium_antigua": {
+    "canonical_name": "Sir Vivian Richards Stadium, North Sound",
+    "city": "North Sound",
+    "country": "West Indies",
+    "aliases": [
+      "Sir Vivian Richards Stadium",
+      "Sir Vivian Richards Stadium, North Sound",
+      "Sir Vivian Richards Stadium, Antigua"
+    ]
+  },
+  "kensington_oval_barbados": {
+    "canonical_name": "Kensington Oval, Bridgetown",
+    "city": "Bridgetown",
+    "country": "West Indies",
+    "aliases": [
+      "Kensington Oval",
+      "Kensington Oval, Bridgetown",
+      "Kensington Oval, Barbados"
+    ]
+  },
+  "sabina_park_kingston": {
+    "canonical_name": "Sabina Park, Kingston",
+    "city": "Kingston",
+    "country": "West Indies",
+    "aliases": [
+      "Sabina Park",
+      "Sabina Park, Kingston",
+      "Sabina Park, Kingston, Jamaica"
+    ]
+  },
+  "queens_park_oval_port_of_spain": {
+    "canonical_name": "Queen's Park Oval, Port of Spain",
+    "city": "Port of Spain",
+    "country": "West Indies",
+    "aliases": [
+      "Queen's Park Oval",
+      "Queen's Park Oval, Port of Spain",
+      "Queen's Park Oval, Trinidad"
+    ]
+  },
+  "arnos_vale_ground_kingstown": {
+    "canonical_name": "Arnos Vale Ground, Kingstown",
+    "city": "Kingstown",
+    "country": "West Indies",
+    "aliases": [
+      "Arnos Vale Ground",
+      "Arnos Vale Ground, Kingstown",
+      "Arnos Vale Ground, Kingstown, St Vincent"
+    ]
+  },
+  "eden_park_auckland": {
+    "canonical_name": "Eden Park, Auckland",
+    "city": "Auckland",
+    "country": "New Zealand",
+    "aliases": [
+      "Eden Park",
+      "Eden Park, Auckland"
+    ]
+  },
+  "hagley_oval_christchurch": {
+    "canonical_name": "Hagley Oval, Christchurch",
+    "city": "Christchurch",
+    "country": "New Zealand",
+    "aliases": [
+      "Hagley Oval",
+      "Hagley Oval, Christchurch"
+    ]
+  },
+  "ami_stadium_christchurch": {
+    "canonical_name": "AMI Stadium, Christchurch",
+    "city": "Christchurch",
+    "country": "New Zealand",
+    "aliases": [
+      "AMI Stadium",
+      "AMI Stadium, Christchurch",
+      "Jade Stadium",
+      "Jade Stadium, Christchurch",
+      "Lancaster Park",
+      "Lancaster Park, Christchurch"
+    ]
+  },
+  "basin_reserve_wellington": {
+    "canonical_name": "Basin Reserve, Wellington",
+    "city": "Wellington",
+    "country": "New Zealand",
+    "aliases": [
+      "Basin Reserve",
+      "Basin Reserve, Wellington"
+    ]
+  },
+  "sky_stadium_wellington": {
+    "canonical_name": "Sky Stadium, Wellington",
+    "city": "Wellington",
+    "country": "New Zealand",
+    "aliases": [
+      "Sky Stadium",
+      "Sky Stadium, Wellington",
+      "Westpac Stadium",
+      "Westpac Stadium, Wellington"
+    ]
+  },
+  "seddon_park_hamilton": {
+    "canonical_name": "Seddon Park, Hamilton",
+    "city": "Hamilton",
+    "country": "New Zealand",
+    "aliases": [
+      "Seddon Park",
+      "Seddon Park, Hamilton"
+    ]
+  },
+  "mclean_park_napier": {
+    "canonical_name": "McLean Park, Napier",
+    "city": "Napier",
+    "country": "New Zealand",
+    "aliases": [
+      "McLean Park",
+      "McLean Park, Napier"
+    ]
+  },
+  "dubai_stadium_dubai": {
+    "canonical_name": "Dubai International Cricket Stadium, Dubai",
+    "city": "Dubai",
+    "country": "UAE",
+    "aliases": [
+      "Dubai International Cricket Stadium",
+      "Dubai International Cricket Stadium, Dubai"
+    ]
+  },
+  "sharjah_stadium_sharjah": {
+    "canonical_name": "Sharjah Cricket Stadium, Sharjah",
+    "city": "Sharjah",
+    "country": "UAE",
+    "aliases": [
+      "Sharjah Cricket Stadium",
+      "Sharjah Cricket Stadium, Sharjah"
+    ]
+  },
+  "sheikh_zayed_stadium_abu_dhabi": {
+    "canonical_name": "Sheikh Zayed Stadium, Abu Dhabi",
+    "city": "Abu Dhabi",
+    "country": "UAE",
+    "aliases": [
+      "Sheikh Zayed Cricket Stadium",
+      "Sheikh Zayed Stadium",
+      "Sheikh Zayed Stadium, Abu Dhabi",
+      "Zayed Cricket Stadium, Abu Dhabi"
+    ]
+  },
+  "shere_bangla_stadium_dhaka": {
+    "canonical_name": "Sher-e-Bangla National Cricket Stadium, Mirpur",
+    "city": "Mirpur",
+    "country": "Bangladesh",
+    "aliases": [
+      "Sher-e-Bangla National Cricket Stadium",
+      "Sher-e-Bangla National Stadium",
+      "Sher-e-Bangla National Cricket Stadium, Mirpur",
+      "Shere Bangla National Stadium, Mirpur"
+    ]
+  },
+  "zahur_ahmed_chowdhury_stadium_chattogram": {
+    "canonical_name": "Zahur Ahmed Chowdhury Stadium, Chattogram",
+    "city": "Chattogram",
+    "country": "Bangladesh",
+    "aliases": [
+      "Zahur Ahmed Chowdhury Stadium",
+      "Zahur Ahmed Chowdhury Stadium, Chittagong",
+      "Zohur Ahmed Chowdhury Stadium"
+    ]
+  },
+  "gaddafi_stadium_lahore": {
+    "canonical_name": "Gaddafi Stadium, Lahore",
+    "city": "Lahore",
+    "country": "Pakistan",
+    "aliases": [
+      "Gaddafi Stadium",
+      "Gaddafi Stadium, Lahore"
+    ]
+  },
+  "national_stadium_karachi": {
+    "canonical_name": "National Stadium, Karachi",
+    "city": "Karachi",
+    "country": "Pakistan",
+    "aliases": [
+      "National Stadium",
+      "National Stadium, Karachi",
+      "National Bank Cricket Arena"
+    ]
+  },
+  "rawalpindi_cricket_stadium_rawalpindi": {
+    "canonical_name": "Rawalpindi Cricket Stadium, Rawalpindi",
+    "city": "Rawalpindi",
+    "country": "Pakistan",
+    "aliases": [
+      "Rawalpindi Cricket Stadium",
+      "Rawalpindi Cricket Stadium, Rawalpindi"
+    ]
+  },
+  "r_premadasa_stadium_colombo": {
+    "canonical_name": "R. Premadasa Stadium, Colombo",
+    "city": "Colombo",
+    "country": "Sri Lanka",
+    "aliases": [
+      "R Premadasa Stadium",
+      "R. Premadasa Stadium",
+      "R.Premadasa Stadium, Khettarama",
+      "R. Premadasa Stadium, Colombo"
+    ]
+  },
+  "mahinda_rajapaksa_stadium_hambantota": {
+    "canonical_name": "Mahinda Rajapaksa International Cricket Stadium, Hambantota",
+    "city": "Hambantota",
+    "country": "Sri Lanka",
+    "aliases": [
+      "Mahinda Rajapaksa International Cricket Stadium",
+      "Mahinda Rajapaksa International Cricket Stadium, Sooriyawewa",
+      "Mahinda Rajapaksa International Cricket Stadium, Hambantota"
+    ]
+  },
+  "pallekele_stadium_kandy": {
+    "canonical_name": "Pallekele International Cricket Stadium, Kandy",
+    "city": "Kandy",
+    "country": "Sri Lanka",
+    "aliases": [
+      "Pallekele International Cricket Stadium",
+      "Pallekele International Cricket Stadium, Kandy"
+    ]
+  },
+  "ssc_colombo": {
+    "canonical_name": "Sinhalese Sports Club Ground, Colombo",
+    "city": "Colombo",
+    "country": "Sri Lanka",
+    "aliases": [
+      "Sinhalese Sports Club Ground",
+      "Sinhalese Sports Club Ground, Colombo",
+      "SSC Colombo"
+    ]
+  }
+}

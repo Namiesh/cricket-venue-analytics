@@ -1,0 +1,47 @@
+# =========================
+# Environment / Secrets
+# =========================
+.env
+.env.*
+.streamlit/secrets.toml
+
+# =========================
+# Python
+# =========================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Virtual environments
+env/
+venv/
+ENV/
+.venv/
+
+# =========================
+# Raw / Large Dataset
+# =========================
+data/raw/
+
+# =========================
+# Temporary / Generated Files
+# =========================
+*.sqlite
+*.sqlite3
+
+# =========================
+# IDE / OS
+# =========================
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# =========================
+# Python tooling
+# =========================
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/

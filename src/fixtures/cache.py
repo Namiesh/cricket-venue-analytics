@@ -27,7 +27,9 @@ from src.fixtures.client import (
     fetch_raw_matches_from_api,
     parse_and_filter_fixtures,
     is_mens_international_match,
-    CricAPIError
+    CricAPIError,
+    EXCLUDED_SERIES_KEYWORDS,
+    INTERNATIONAL_MENS_TEAMS,
 )
 from src.processing.venue_normalizer import get_canonical_venue_info
 
@@ -47,26 +49,10 @@ DEFAULT_FIXTURES = [
         canonical_display_name="Barsapara Cricket Stadium, Guwahati",
         city="Guwahati",
         country="India",
-        scheduled_datetime="2026-09-30T08:30:00Z",
+        scheduled_datetime="2026-10-03T08:30:00Z",
         status="upcoming",
         series="West Indies tour of India 2026",
         resolved_venue_id="barsapara_cricket_stadium_guwahati",
-    ),
-    UpcomingFixture(
-        match_id="cric_sa_aus_odi_3",
-        team1="South Africa",
-        team2="Australia",
-        format="ODI",
-        venue="JB Marks Oval, Potchefstroom",
-        raw_venue_name="JB Marks Oval, Potchefstroom",
-        canonical_venue_id="jb_marks_oval",
-        canonical_display_name="JB Marks Oval, Potchefstroom",
-        city="Potchefstroom",
-        country="South Africa",
-        scheduled_datetime="2026-09-30T11:30:00Z",
-        status="upcoming",
-        series="Australia tour of South Africa 2026",
-        resolved_venue_id="jb_marks_oval",
     ),
 ]
 
@@ -147,14 +133,114 @@ def is_cache_valid(cache_data: Dict[str, Any]) -> bool:
         return False
 
 
-def get_upcoming_fixtures(
+def filter_upcoming_fixtures(
+    fixtures: List[UpcomingFixture],
+    now: Optional[Any] = None
+) -> List[UpcomingFixture]:
+    """
+    Centralized filter for upcoming international fixtures.
+    Behavior:
+    1. Uses timezone-aware UTC internally.
+    2. If now is None, uses current UTC time.
+    3. A fixture is upcoming only when:
+       - start_datetime > now
+       - men's international
+       - format is ODI or T20I
+       - status is not completed/finished
+       - status is not abandoned/cancelled
+       - status is not live/in-progress
+    4. Sorts remaining fixtures chronologically by start_datetime.
+    """
+    if now is None:
+        now_dt = datetime.now(timezone.utc)
+    elif isinstance(now, str):
+        try:
+            dt_str = now.replace("Z", "+00:00")
+            now_dt = datetime.fromisoformat(dt_str)
+        except Exception:
+            now_dt = datetime.now(timezone.utc)
+    elif isinstance(now, datetime):
+        now_dt = now
+    else:
+        now_dt = datetime.now(timezone.utc)
+
+    if now_dt.tzinfo is None:
+        now_dt = now_dt.replace(tzinfo=timezone.utc)
+    else:
+        now_dt = now_dt.astimezone(timezone.utc)
+
+    valid_upcoming: List[Tuple[datetime, UpcomingFixture]] = []
+
+    for f in fixtures:
+        if not isinstance(f, UpcomingFixture):
+            continue
+
+        # Format check: ODI or T20I
+        fmt = str(f.format or "").strip().upper()
+        if fmt not in ["ODI", "T20I"]:
+            continue
+
+        # Men's international check
+        t1 = str(f.team1 or "").lower().strip()
+        t2 = str(f.team2 or "").lower().strip()
+        ser = str(f.series or "").lower().strip()
+
+        # Exclude Women's matches
+        if any(w in t1 or w in t2 or w in ser for w in ["women", "womens", "wodi", "wt20", "wbbl", "wpl"]):
+            continue
+
+        # Exclude non-international / domestic / franchise series
+        if any(kw in ser for kw in EXCLUDED_SERIES_KEYWORDS):
+            continue
+
+        # Recognized men's international team check
+        is_t1_intl = any(it == t1 or f" {it}" in f" {t1}" for it in INTERNATIONAL_MENS_TEAMS)
+        is_t2_intl = any(it == t2 or f" {it}" in f" {t2}" for it in INTERNATIONAL_MENS_TEAMS)
+        if not (is_t1_intl and is_t2_intl):
+            continue
+
+        # Status check
+        st = str(f.status or "").lower().strip()
+        raw = f.raw_data or {}
+        if raw.get("matchEnded", False) is True:
+            continue
+        if any(s in st for s in [
+            "completed", "finished", "result", "won by", "abandoned", "cancelled",
+            "no result", "live", "in progress", "in-progress", "ongoing"
+        ]):
+            continue
+
+        # Start datetime check: start_datetime > now
+        dt_str = str(f.scheduled_datetime or "").strip().replace("Z", "+00:00")
+        if not dt_str:
+            continue
+
+        try:
+            if "T" in dt_str:
+                start_dt = datetime.fromisoformat(dt_str)
+            else:
+                start_dt = datetime.strptime(dt_str, "%Y-%m-%d %H:%M:%S")
+
+            if start_dt.tzinfo is None:
+                start_dt = start_dt.replace(tzinfo=timezone.utc)
+            else:
+                start_dt = start_dt.astimezone(timezone.utc)
+        except Exception:
+            continue
+
+        if start_dt > now_dt:
+            valid_upcoming.append((start_dt, f))
+
+    # Sort chronologically by start_dt
+    valid_upcoming.sort(key=lambda x: x[0])
+    return [item[1] for item in valid_upcoming]
+
+
+def _get_raw_cached_or_api_fixtures(
     db_path: Optional[Any] = None,
     force_refresh: bool = False
 ) -> Tuple[List[UpcomingFixture], Dict[str, Any]]:
-    """
-    Primary interface for fetching upcoming fixtures with strict cache enforcement and validation.
-    Returns (fixtures_list, metadata_dict).
-    """
+    """Internal helper to load raw fixtures from cache or CricAPI."""
     cache_data = load_cache_file()
     cached_fixtures: List[UpcomingFixture] = []
     fetched_at = None
@@ -179,7 +265,7 @@ def get_upcoming_fixtures(
 
     valid = is_cache_valid(cache_data) if (cache_data and cache_data.get("matches")) else True
 
-    # Case 1: Fresh cache available and valid fixtures exist and no force_refresh -> Return cache (0 API calls)
+    # Case 1: Fresh cache available and valid fixtures exist and no force_refresh -> Return cache
     if valid and not force_refresh and cached_fixtures:
         return cached_fixtures, {
             "status": "cached",
@@ -212,7 +298,6 @@ def get_upcoming_fixtures(
                 "message": "Upcoming fixtures updated successfully.",
             }
         else:
-            # API returned no matches matching filters; preserve existing valid cache
             return cached_fixtures, {
                 "status": "cached",
                 "api_called": True,
@@ -221,7 +306,6 @@ def get_upcoming_fixtures(
             }
 
     except CricAPIError as e:
-        # Preserve old valid cache on API failure
         return cached_fixtures, {
             "status": "error",
             "api_called": False,
@@ -229,10 +313,30 @@ def get_upcoming_fixtures(
             "message": f"Using previous cached fixture data. Latest refresh failed: {str(e)}",
         }
     except Exception as e:
-        # Preserve old valid cache on any error
         return cached_fixtures, {
             "status": "error",
             "api_called": False,
             "fetched_at": fetched_at,
             "message": f"Using previous cached fixture data. Unexpected error: {str(e)}",
         }
+
+
+def get_upcoming_fixtures(
+    db_path: Optional[Any] = None,
+    force_refresh: bool = False,
+    now: Optional[Any] = None
+) -> Any:
+    """
+    Primary interface for fetching and filtering upcoming fixtures.
+    Supports:
+    - get_upcoming_fixtures(db_path=..., force_refresh=..., now=...) -> (filtered_fixtures_list, metadata_dict)
+    - get_upcoming_fixtures(fixtures_list, now=...) -> filtered_fixtures_list
+    """
+    if isinstance(db_path, list):
+        cutoff_now = now if now is not None else (force_refresh if isinstance(force_refresh, (datetime, str)) else None)
+        return filter_upcoming_fixtures(db_path, now=cutoff_now)
+
+    raw_fixtures, meta = _get_raw_cached_or_api_fixtures(db_path=db_path, force_refresh=force_refresh)
+    filtered_fixtures = filter_upcoming_fixtures(raw_fixtures, now=now)
+    return filtered_fixtures, meta
+

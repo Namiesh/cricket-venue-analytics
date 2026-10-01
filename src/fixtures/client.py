@@ -185,3 +185,75 @@ def parse_and_filter_fixtures(
 
     fixtures.sort(key=sort_key)
     return fixtures
+
+
+def fetch_match_scorecard_from_api(api_key: str, match_id: str) -> Optional[Dict[str, Any]]:
+    """Performs HTTP GET request to CricAPI /v1/match_info?id=..."""
+    clean_key = api_key.strip() if api_key else ""
+    if not clean_key or not match_id:
+        return None
+
+    url = "https://api.cricapi.com/v1/match_info"
+    params = {"apikey": clean_key, "id": match_id}
+
+    try:
+        response = requests.get(url, params=params, timeout=10)
+        if response.status_code == 200:
+            data = response.json()
+            if data.get("status") == "success":
+                return data.get("data")
+    except Exception:
+        pass
+    return None
+
+
+def is_completed_mens_international_match(match: Dict[str, Any]) -> Tuple[bool, Optional[str]]:
+    """
+    Evaluates whether a CricAPI match is a COMPLETED Men's International ODI or T20I.
+    Returns (is_completed, format_tag).
+    """
+    m_type = str(match.get("matchType", "")).lower().strip()
+    name = str(match.get("name", "")).lower()
+    status = str(match.get("status", "")).lower()
+    series = (str(match.get("series_id", "")) + " " + name).lower()
+
+    # Format check: Must be odi or t20/t20i
+    if m_type == "odi":
+        format_tag = "ODI"
+    elif m_type in ["t20", "t20i"]:
+        format_tag = "T20I"
+    else:
+        return False, None
+
+    # Exclude Women's matches
+    if any(w in name or w in series for w in ["women", "womens", "wodi", "wt20", "wbbl", "wpl"]):
+        return False, None
+
+    # Exclude franchise, domestic, A teams, tour matches
+    for kw in EXCLUDED_SERIES_KEYWORDS:
+        if kw in name or kw in series:
+            return False, None
+
+    # Must be COMPLETED
+    is_ended = match.get("matchEnded", False) is True
+    is_completed_status = any(s in status for s in ["completed", "won by", "won", "result"]) and not any(s in status for s in ["abandoned", "cancelled", "no result"])
+
+    if not (is_ended or is_completed_status):
+        return False, None
+
+    # Teams check: Must involve recognized men's international teams
+    teams = match.get("teams", [])
+    if not teams or len(teams) < 2:
+        return False, None
+
+    t1_lower = str(teams[0]).lower().strip()
+    t2_lower = str(teams[1]).lower().strip()
+
+    is_t1_intl = any(it == t1_lower or f" {it}" in f" {t1_lower}" for it in INTERNATIONAL_MENS_TEAMS)
+    is_t2_intl = any(it == t2_lower or f" {it}" in f" {t2_lower}" for it in INTERNATIONAL_MENS_TEAMS)
+
+    if not (is_t1_intl and is_t2_intl):
+        return False, None
+
+    return True, format_tag
+

@@ -234,6 +234,83 @@ class TestFixturesSystem(unittest.TestCase):
         self.assertNotEqual(senwes_vid, "wankhede_stadium_mumbai")
         self.assertEqual(senwes_vid, "senwes_park_potchefstroom")
 
+    # 21. Cutoff date filter & status exclusion (2 Oct 2026 cutoff test)
+    def test_cutoff_date_filter_and_status_exclusion(self):
+        fixed_now = "2026-10-02T00:15:00+05:30"
+
+        input_fixtures = [
+            UpcomingFixture(
+                match_id="past_1",
+                team1="India",
+                team2="West Indies",
+                format="ODI",
+                venue="Barsapara",
+                scheduled_datetime="2026-09-30T08:30:00Z",
+                status="upcoming",
+            ),
+            UpcomingFixture(
+                match_id="past_2",
+                team1="South Africa",
+                team2="Australia",
+                format="ODI",
+                venue="JB Marks Oval",
+                scheduled_datetime="2026-09-30T11:30:00Z",
+                status="upcoming",
+            ),
+            UpcomingFixture(
+                match_id="future_2",
+                team1="South Africa",
+                team2="Australia",
+                format="ODI",
+                venue="SuperSport Park",
+                scheduled_datetime="2026-10-06T14:00:00Z",
+                status="upcoming",
+            ),
+            UpcomingFixture(
+                match_id="future_1",
+                team1="India",
+                team2="Australia",
+                format="ODI",
+                venue="Wankhede",
+                scheduled_datetime="2026-10-03T08:30:00Z",
+                status="upcoming",
+            ),
+            UpcomingFixture(
+                match_id="status_completed",
+                team1="India",
+                team2="England",
+                format="ODI",
+                venue="Wankhede",
+                scheduled_datetime="2026-10-05T10:00:00Z",
+                status="completed",
+            ),
+            UpcomingFixture(
+                match_id="status_live",
+                team1="Australia",
+                team2="England",
+                format="T20I",
+                venue="MCG",
+                scheduled_datetime="2026-10-04T10:00:00Z",
+                status="live",
+            ),
+            UpcomingFixture(
+                match_id="status_cancelled",
+                team1="New Zealand",
+                team2="Pakistan",
+                format="ODI",
+                venue="Eden Park",
+                scheduled_datetime="2026-10-07T10:00:00Z",
+                status="cancelled",
+            ),
+        ]
+
+        from src.fixtures.cache import filter_upcoming_fixtures
+        result = filter_upcoming_fixtures(input_fixtures, now=fixed_now)
+
+        result_ids = [f.match_id for f in result]
+        self.assertEqual(result_ids, ["future_1", "future_2"])
+
 
 if __name__ == "__main__":
     unittest.main()
+

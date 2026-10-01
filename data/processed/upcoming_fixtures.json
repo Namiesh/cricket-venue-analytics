@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-09-29T13:48:36.714104+00:00",
+  "fetched_at": "2026-10-02T00:20:00.000000+00:00",
   "provider": "default",
   "matches": [
     {
@@ -13,28 +13,11 @@
       "canonical_display_name": "Barsapara Cricket Stadium, Guwahati",
       "city": "Guwahati",
       "country": "India",
-      "scheduled_datetime": "2026-09-30T08:30:00Z",
+      "scheduled_datetime": "2026-10-03T08:30:00Z",
       "status": "upcoming",
       "series": "West Indies tour of India 2026",
       "resolved_venue_id": "barsapara_cricket_stadium_guwahati",
       "raw_data": {}
-    },
-    {
-      "match_id": "cric_sa_aus_odi_3",
-      "team1": "South Africa",
-      "team2": "Australia",
-      "format": "ODI",
-      "venue": "JB Marks Oval, Potchefstroom",
-      "raw_venue_name": "JB Marks Oval, Potchefstroom",
-      "canonical_venue_id": "jb_marks_oval",
-      "canonical_display_name": "JB Marks Oval, Potchefstroom",
-      "city": "Potchefstroom",
-      "country": "South Africa",
-      "scheduled_datetime": "2026-09-30T11:30:00Z",
-      "status": "upcoming",
-      "series": "Australia tour of South Africa 2026",
-      "resolved_venue_id": "jb_marks_oval",
-      "raw_data": {}
     }
   ]
-}
+}

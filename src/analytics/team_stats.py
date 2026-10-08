@@ -85,6 +85,22 @@ def get_team_venue_stats(
     first_inn_scores = []
     second_inn_scores = []
 
+    # Batch-fetch innings for all matches in a single query
+    innings_lookup: Dict[str, List[Dict[str, Any]]] = {}
+    if rows:
+        match_ids = [m["match_id"] for m in rows]
+        placeholders = ", ".join(["?"] * len(match_ids))
+        with get_db_connection(db_path) as conn:
+            cursor = conn.cursor()
+            cursor.execute(f"""
+                SELECT match_id, innings_number, batting_team, total_runs
+                FROM innings
+                WHERE match_id IN ({placeholders}) AND batting_team = ? AND innings_number IN (1, 2);
+            """, match_ids + [team])
+            for r in cursor.fetchall():
+                rd = dict(r)
+                innings_lookup.setdefault(rd["match_id"], []).append(rd)
+
     for m in rows:
         match_id = m["match_id"]
         res_type = m["result_type"]
@@ -103,16 +119,7 @@ def get_team_venue_stats(
         elif winner is not None:
             losses += 1
 
-        with get_db_connection(db_path) as conn:
-            cursor = conn.cursor()
-            cursor.execute("""
-                SELECT innings_number, batting_team, total_runs
-                FROM innings
-                WHERE match_id = ? AND batting_team = ? AND innings_number IN (1, 2);
-            """, (match_id, team))
-            inn_rows = [dict(r) for r in cursor.fetchall()]
-
-        for inn in inn_rows:
+        for inn in innings_lookup.get(match_id, []):
             tot = inn["total_runs"]
             scores.append(tot)
             if inn["innings_number"] == 1:
@@ -189,18 +196,30 @@ def get_head_to_head_stats(
     t1_scores = []
     t2_scores = []
 
-    for m in rows:
-        m_id = m["match_id"]
+    # Batch-fetch innings for all H2H matches in a single query
+    innings_lookup: Dict[str, List[Dict[str, Any]]] = {}
+    if rows:
+        match_ids = [m["match_id"] for m in rows]
+        placeholders = ", ".join(["?"] * len(match_ids))
         with get_db_connection(db_path) as conn:
             cursor = conn.cursor()
-            cursor.execute("SELECT batting_team, total_runs FROM innings WHERE match_id = ? AND innings_number IN (1, 2)", (m_id,))
-            for inn in cursor.fetchall():
-                b_team = inn[0]
-                tot = inn[1]
-                if b_team == team1:
-                    t1_scores.append(tot)
-                elif b_team == team2:
-                    t2_scores.append(tot)
+            cursor.execute(f"""
+                SELECT match_id, batting_team, total_runs
+                FROM innings
+                WHERE match_id IN ({placeholders}) AND innings_number IN (1, 2);
+            """, match_ids)
+            for r in cursor.fetchall():
+                rd = dict(r)
+                innings_lookup.setdefault(rd["match_id"], []).append(rd)
+
+    for m in rows:
+        for inn in innings_lookup.get(m["match_id"], []):
+            b_team = inn["batting_team"]
+            tot = inn["total_runs"]
+            if b_team == team1:
+                t1_scores.append(tot)
+            elif b_team == team2:
+                t2_scores.append(tot)
 
     return {
         "team1": team1,
@@ -259,27 +278,40 @@ def get_team_venue_analysis(
         cursor.execute(query, params)
         all_team_matches = [dict(row) for row in cursor.fetchall()]
 
-    qualifying_matches = []
+    # First pass: filter no-result matches without touching the DB
     no_results_count = 0
-
+    candidate_matches = []
     for m in all_team_matches:
-        match_id = m["match_id"]
         if m["result_type"] == "no result" or (m["winner"] is None and m["result_type"] not in ["tie", "normal"]):
             no_results_count += 1
-            continue
+        else:
+            candidate_matches.append(m)
 
+    # Batch-fetch innings for all candidate matches in a single query
+    innings_lookup: Dict[str, List[Dict[str, Any]]] = {}
+    if candidate_matches:
+        candidate_ids = [m["match_id"] for m in candidate_matches]
+        placeholders = ", ".join(["?"] * len(candidate_ids))
         with get_db_connection(db_path) as conn:
             cursor = conn.cursor()
-            cursor.execute("""
+            cursor.execute(f"""
                 SELECT innings_id, match_id, innings_number, batting_team, total_runs, wickets_lost,
                        overs_completed, balls_delivered, is_completed, target_runs, result_context
                 FROM innings
-                WHERE match_id = ? AND innings_number IN (1, 2)
-                ORDER BY innings_number ASC;
-            """, (match_id,))
-            inn_rows = [dict(r) for r in cursor.fetchall()]
+                WHERE match_id IN ({placeholders}) AND innings_number IN (1, 2)
+                ORDER BY match_id, innings_number ASC;
+            """, candidate_ids)
+            for r in cursor.fetchall():
+                rd = dict(r)
+                innings_lookup.setdefault(rd["match_id"], []).append(rd)
 
-        if not inn_rows or len(inn_rows) == 0:
+    # Second pass: enrich matches using the lookup dict
+    qualifying_matches = []
+    for m in candidate_matches:
+        match_id = m["match_id"]
+        inn_rows = innings_lookup.get(match_id, [])
+
+        if not inn_rows:
             continue
 
         inn1 = inn_rows[0] if len(inn_rows) >= 1 else None

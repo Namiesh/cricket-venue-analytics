@@ -141,27 +141,39 @@ def get_recent_matches(
         all_matches = [dict(row) for row in cursor.fetchall()]
 
     total_available_at_venue = len(all_matches)
-    qualifying_matches = []
     exclusion_reasons = {"no_result": 0, "missing_innings": 0}
 
+    # First pass: filter no-result / abandoned matches without touching the DB
+    candidate_matches = []
     for m in all_matches:
-        match_id = m["match_id"]
         if m["result_type"] == "no result" or (m["winner"] is None and m["result_type"] not in ["tie", "normal"]):
             exclusion_reasons["no_result"] += 1
-            continue
+        else:
+            candidate_matches.append(m)
 
+    # Batch-fetch all innings for candidate matches in a single query
+    innings_lookup: Dict[str, List[Dict[str, Any]]] = {}
+    if candidate_matches:
+        candidate_ids = [m["match_id"] for m in candidate_matches]
+        placeholders = ", ".join(["?"] * len(candidate_ids))
         with get_db_connection(db_path) as conn:
             cursor = conn.cursor()
-            cursor.execute("""
+            cursor.execute(f"""
                 SELECT innings_id, match_id, innings_number, batting_team, total_runs, wickets_lost,
                        overs_completed, balls_delivered, is_completed, target_runs, result_context
                 FROM innings
-                WHERE match_id = ? AND innings_number IN (1, 2)
-                ORDER BY innings_number ASC;
-            """, (match_id,))
-            inn_rows = [dict(r) for r in cursor.fetchall()]
+                WHERE match_id IN ({placeholders}) AND innings_number IN (1, 2)
+                ORDER BY match_id, innings_number ASC;
+            """, candidate_ids)
+            for row in cursor.fetchall():
+                r = dict(row)
+                innings_lookup.setdefault(r["match_id"], []).append(r)
 
-        if not inn_rows or len(inn_rows) == 0:
+    # Second pass: enrich matches using the lookup dict
+    qualifying_matches = []
+    for m in candidate_matches:
+        inn_rows = innings_lookup.get(m["match_id"], [])
+        if not inn_rows:
             exclusion_reasons["missing_innings"] += 1
             continue
 
